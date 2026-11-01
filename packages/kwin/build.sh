@@ -41,7 +41,7 @@ grep -qE "^[[:space:]]*%autosetup" "$SPEC" \
     || { echo "ERROR: kwin.spec does not auto-apply patches; adjust build.sh"; exit 1; }
 
 dnf -y builddep "$SPEC"
-rpmbuild -bb --define "dist ${DIST}" --define "_smp_mflags -j2" --define "_lto_cflags %{nil}" "$SPEC"
+rpmbuild -bb --define "dist ${DIST}" --define "_smp_mflags -j1" --define "_lto_cflags %{nil}" "$SPEC"
 
 for p in ${SUBPKGS}; do
     cp "$HOME"/rpmbuild/RPMS/*/"${p}-${KWIN_VER}-${KWIN_REL}${DIST}".*.rpm /work/out/
